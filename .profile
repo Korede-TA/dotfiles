@@ -13,7 +13,7 @@ export CLICOLOR=1  # colors!
 
 # GENERAL ALIASES
 alias cls=clear
-alias config='/usr/bin/git --git-dir=/Users/korede/.cfg/ --work-tree=/Users/korede'
+alias config='git --git-dir=~/.cfg/ --work-tree=~'
 alias growl='growl -H localhost -m'  # nice little command line growl utility
 alias ding='growl "Done!"'
 alias profile='$EDITOR ~/.profile -w; sauce' # edit profile
