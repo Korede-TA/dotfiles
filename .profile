@@ -1,0 +1,79 @@
+# ENV VARS 
+export PATH="$HOME/.cargo/bin:$PATH"  # Rust Package Manager
+export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"  # Python stuff
+export GOPATH=${HOME}/src/go && export PATH=$PATH:$GOPATH/bin  # Golang 
+export PATH=/usr/local/Cellar/ruby/2.4.1_1/bin:$PATH
+export PS1='\[\033[0;32m\]\u@\h:\[\033[36m\]\W\[\033[0m\] \$ '  # bash prompt changes  (old one: "\h:\W \u\$")
+# set -o vi  # set bash to vim editin mode
+export COLORTERM='truecolor'
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+export LC_CTYPE=en_US.UTF-8
+export CLICOLOR=1  # colors!
+export LS_CACHED_DIR='' # cache dir for 'lc' custom command
+## CB SPECIFIC ENV VARS
+#export CF_TOKEN=
+
+# GENERAL ALIASES
+alias cls=clear
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias growl='growl -H localhost -m'  # nice little command line growl utility
+alias ding='growl "Done!"'
+alias profile='$EDITOR ~/.profile -w; sauce' # edit profile
+alias sauce='source ~/.profile'
+alias topcpu='ps aux | sort -n +2 | tail -10'  # top 10 cpu processes  [sys monitoring]
+alias topmem='ps aux | sort -n +3 | tail -10'  # top 10 memory processes [sys monitoring]
+alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'  # disk usage
+alias warm='nice -n 20 ruby -e "loop {}" &'
+alias :='cd ..'  &&  alias ::='cd ../..'  &&  alias :::='cd ../../..'
+alias l='ls -alh'  &&  alias lt='l -t | less'  &&  alias ls="ls -FHG"
+lc() {  # l cached, 
+	if [ $1 -eq "-c" ]; then
+		LS_CACHED_DIR=""  # reset
+		return 0
+	fi
+	newdir="$LS_CACHED_DIR/$1"
+	ls $newdir
+	if [ $? -eq 0 ]; then
+		LS_CACHED_DIR=$1
+	fi
+}
+alias rm='rm -i'  # Add an "Are you sure?" prompt when calling rm
+alias py='python3'
+alias pip='python3 -m pip'
+alias vi='vim'  &&  alias v='vim'
+alias vig='vi -c ":Goyo"'
+alias cwd='pwd | pbcopy' # copy the working directory into the clipboard
+# alias tac=''   # did you know that the Mac doesn't come with a tac command?  Scandalous!
+alias randpass="openssl rand -base64 12"  # generate a random pass
+
+# GIT ALIASES
+alias g='git' # --prefix
+alias gitconf='git config --global -e'
+alias gs='status' 
+alias gb='checkout'
+alias gnb='checkout -b'
+alias gc='commit -m'
+alias gcv='commit -v'
+alias gca='commit -v -a'
+alias gd='diff | $EDITOR'
+alias ga='add'
+alias gl='log'
+alias glast='log -1 HEAD'
+alias gps='push' && alias p='push' 
+alias gpl='pull'
+alias get-current-branch="git branch 2>/dev/null | grep '^*' | colrm 1 2"
+alias get-current-color="if [[ \$(get-current-branch) == \"master\" ]] ; then echo \"1;33m\" ; else echo \"0m\" ; fi"
+alias gst='svn status | grep -v "^X      " | grep -v "^Performing status on external item"' 
+
+# Documentation stuff
+# Godoc
+gocol() { go doc "$@" | vim -Rnc "set filetype=go" -c "set nonumber" - ;}
+
+# LOAD .bashrc 
+# if [ -n "$BASH_VERSION" ]; then
+#     # include .bashrc if it exists
+#     if [ -f "$HOME/.bashrc" ]; then
+#         . "$HOME/.bashrc"
+#     fi
+# fi
