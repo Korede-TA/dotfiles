@@ -24,6 +24,7 @@ let &t_Co=256
 " COLOR STUFF
 set background=light
 hi Normal ctermbg=NONE guibg=NONE
+hi VertSplit ctermbg=233 ctermfg=233
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
@@ -37,8 +38,8 @@ set showcmd  " Show partial commands in the last line of the screen
 " set nomodeline
 " set ignorecase
 " set smartcase
-" set incsearch   " search as you type
-" set hlsearch  " highlight searches
+set incsearch   " search as you type
+set hlsearch  " highlight searches
 set backspace=eol,start,indent  " Allow backspacing over autoindent, line breaks and start of insert action
 " set bs=2 "same as above
 set nostartofline  " Stop certain movements from always going to the first character of a line.
@@ -67,6 +68,7 @@ set wrap
 set lbr  " linebreak
 set showbreak=+
 set laststatus=2
+set vb t_vb =  " make sure visual bell is off
 " set statusline=%F
 
 " MAPPINGS
@@ -80,11 +82,19 @@ map <M-Left> b
 map <M-l> w
 map <M-h> b
 map <F3> :set invlist<CR>  " Show tabs, newlines, etc
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " PLUGIN COMMANDS
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoEnter Limelight!
 let g:airline#extensions#ale#enabled = 1
+let g:airline_theme='gotham'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+autocmd! VimEnter ALEToggle
 
 " CUSTOM COMMANDS
 function! Rl(...)

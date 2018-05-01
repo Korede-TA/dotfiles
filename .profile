@@ -10,6 +10,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 export LC_CTYPE=en_US.UTF-8
 export CLICOLOR=1  # colors!
+export FZF_CTRL_R_OPTS='--sort --exact'
 
 # GENERAL ALIASES
 alias cls=clear
@@ -28,6 +29,7 @@ alias rm='rm -i'  # Add an "Are you sure?" prompt when calling rm
 alias py='python3'
 alias pip='python3 -m pip'
 alias vi='vim'  &&  alias v='vim'
+alias vf='vim $(fzf)'
 alias vig='vi -c ":Goyo"'
 alias cwd='pwd | pbcopy' # copy the working directory into the clipboard
 # alias tac=''   # did you know that the Mac doesn't come with a tac command?  Scandalous!
@@ -51,10 +53,10 @@ alias get-current-color="if [[ \$(get-current-branch) == \"master\" ]] ; then ec
 alias st='svn status | grep -v "^X      " | grep -v "^Performing status on external item"' 
 alias pngs_to_avi='mencoder mf://*.png -mf fps=30 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell:vbitrate=5000 -oac copy -o' #turns a directory of pngs into a single, beautiful avi
 
-# LOAD .bashrc 
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-        . "$HOME/.bashrc"
-    fi
-fi
+# LOAD .bashrc  
+# if [ -n "$BASH_VERSION" ]; then
+#     # include .bashrc if it exists
+#     if [ -f "$HOME/.bashrc" ]; then
+#         . "$HOME/.bashrc"
+#     fi
+# fi
