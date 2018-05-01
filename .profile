@@ -10,9 +10,6 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 export LC_CTYPE=en_US.UTF-8
 export CLICOLOR=1  # colors!
-export LS_CACHED_DIR='' # cache dir for 'lc' custom command
-## CB SPECIFIC ENV VARS
-#export CF_TOKEN=
 
 # GENERAL ALIASES
 alias cls=clear
@@ -27,17 +24,6 @@ alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)
 alias warm='nice -n 20 ruby -e "loop {}" &'
 alias :='cd ..'  &&  alias ::='cd ../..'  &&  alias :::='cd ../../..'
 alias l='ls -alh'  &&  alias lt='l -t | less'  &&  alias ls="ls -FHG"
-lc() {  # l cached, 
-	if [ $1 -eq "-c" ]; then
-		LS_CACHED_DIR=""  # reset
-		return 0
-	fi
-	newdir="$LS_CACHED_DIR/$1"
-	ls $newdir
-	if [ $? -eq 0 ]; then
-		LS_CACHED_DIR=$1
-	fi
-}
 alias rm='rm -i'  # Add an "Are you sure?" prompt when calling rm
 alias py='python3'
 alias pip='python3 -m pip'
