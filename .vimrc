@@ -9,7 +9,7 @@ let g:completor_clang_binary = '/usr/bin/clang'
 let g:comletor_node_binary = '/usr/local/bin/node'
 let g:ycm_filetype_specific_completion_to_disable = {'markdown': 1}
 let g:javascript_plugin_jsdoc = 1
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = "goimports"
 
 " Manual plugins for completion based on the web component spec
 set runtimepath^=~/.vim/bundle/vim-webcomponents/syntax/css.vim
@@ -37,8 +37,8 @@ set showcmd  " Show partial commands in the last line of the screen
 " set nomodeline
 " set ignorecase
 " set smartcase
-" set incsearch   " search as you type
-" set hlsearch  " highlight searches
+set incsearch   " search as you type
+set hlsearch  " highlight searches
 set backspace=eol,start,indent  " Allow backspacing over autoindent, line breaks and start of insert action
 " set bs=2 "same as above
 set nostartofline  " Stop certain movements from always going to the first character of a line.
@@ -80,14 +80,18 @@ map <M-Left> b
 map <M-l> w
 map <M-h> b
 map <F3> :set invlist<CR>  " Show tabs, newlines, etc
+map <M-_> :show number!
 
 " PLUGIN COMMANDS
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoEnter Limelight!
 let g:airline#extensions#ale#enabled = 1
 
+" RTP Mods
+set rtp+=/usr/local/opt/fzf
+
 " CUSTOM COMMANDS
-function! Rl(...)
+function! R(...)
 	if a:0 == 2
 		execute "r ! sed -n " . a:2 . "p " . a:1
 	elseif a:0 == 1
@@ -95,7 +99,7 @@ function! Rl(...)
 	endif
 endfunction
 
-command! -nargs=+ R :call Rl(<f-args>)
+" Create Custom Command mapping to ':R'
+command! -nargs=+ R :call R(<f-args>)
 
-" PLUGIN MANAGER STUFF
 execute pathogen#infect()
