@@ -9,7 +9,7 @@ let g:completor_clang_binary = '/usr/bin/clang'
 let g:comletor_node_binary = '/usr/local/bin/node'
 let g:ycm_filetype_specific_completion_to_disable = {'markdown': 1}
 let g:javascript_plugin_jsdoc = 1
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = "goimports"
 
 " Manual plugins for completion based on the web component spec
 set runtimepath^=~/.vim/bundle/vim-webcomponents/syntax/css.vim
@@ -86,6 +86,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+map <M-_> :show number!
 
 " PLUGIN COMMANDS
 autocmd! User GoyoEnter Limelight
@@ -96,8 +97,11 @@ highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 autocmd! VimEnter ALEToggle
 
+" RTP Mods
+set rtp+=/usr/local/opt/fzf
+
 " CUSTOM COMMANDS
-function! Rl(...)
+function! R(...)
 	if a:0 == 2
 		execute "r ! sed -n " . a:2 . "p " . a:1
 	elseif a:0 == 1
@@ -105,7 +109,7 @@ function! Rl(...)
 	endif
 endfunction
 
-command! -nargs=+ R :call Rl(<f-args>)
+" Create Custom Command mapping to ':R'
+command! -nargs=+ R :call R(<f-args>)
 
-" PLUGIN MANAGER STUFF
 execute pathogen#infect()

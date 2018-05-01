@@ -36,24 +36,29 @@ alias cwd='pwd | pbcopy' # copy the working directory into the clipboard
 alias randpass="openssl rand -base64 12"  # generate a random pass
 
 # GIT ALIASES
-alias g='git'
-alias s='status' 
-alias b='checkout -b'
-alias c='commit -m'
-alias cv='commit -v'
-alias ca='commit -v -a'
-alias d='diff | $EDITOR'
-alias a='add'
-alias l='log'
-alias last='log -1 HEAD'
-alias ps='push' && alias p='push' 
-alias pl='pull'
+alias g='git' # --prefix
+alias gitconf='git config --global -e'
+alias gs='status' 
+alias gb='checkout'
+alias gnb='checkout -b'
+alias gc='commit -m'
+alias gcv='commit -v'
+alias gca='commit -v -a'
+alias gd='diff | $EDITOR'
+alias ga='add'
+alias gl='log'
+alias glast='log -1 HEAD'
+alias gps='push' && alias p='push' 
+alias gpl='pull'
 alias get-current-branch="git branch 2>/dev/null | grep '^*' | colrm 1 2"
 alias get-current-color="if [[ \$(get-current-branch) == \"master\" ]] ; then echo \"1;33m\" ; else echo \"0m\" ; fi"
-alias st='svn status | grep -v "^X      " | grep -v "^Performing status on external item"' 
-alias pngs_to_avi='mencoder mf://*.png -mf fps=30 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell:vbitrate=5000 -oac copy -o' #turns a directory of pngs into a single, beautiful avi
+alias gst='svn status | grep -v "^X      " | grep -v "^Performing status on external item"' 
 
-# LOAD .bashrc  
+# Documentation stuff
+# Godoc
+gocol() { go doc "$@" | vim -Rnc "set filetype=go" -c "set nonumber" - ;}
+
+# LOAD .bashrc 
 # if [ -n "$BASH_VERSION" ]; then
 #     # include .bashrc if it exists
 #     if [ -f "$HOME/.bashrc" ]; then
