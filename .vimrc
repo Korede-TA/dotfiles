@@ -7,9 +7,12 @@ set updatetime=250
 let g:completor_gocode_binary = '/Users/korede/code/go/bin/gocode'
 let g:completor_clang_binary = '/usr/bin/clang'
 let g:comletor_node_binary = '/usr/local/bin/node'
-let g:ycm_filetype_specific_completion_to_disable = {'markdown': 1}
+" let g:ycm_filetype_specific_completion_to_disable = {'markdown': 1}
 let g:javascript_plugin_jsdoc = 1
 let g:go_fmt_command = "goimports"
+
+" Vim FuzzyFind
+set path+=**
 
 " Manual plugins for completion based on the web component spec
 set runtimepath^=~/.vim/bundle/vim-webcomponents/syntax/css.vim
@@ -86,7 +89,18 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 map <M-_> :show number!
+let mapleader = ","
+
+" Tweaks for browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 " PLUGIN COMMANDS
 autocmd! User GoyoEnter Limelight
@@ -95,7 +109,7 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline_theme='gotham'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
-autocmd! VimEnter ALEToggle
+" autocmd! VimEnter ALEToggle
 
 " RTP Mods
 set rtp+=/usr/local/opt/fzf

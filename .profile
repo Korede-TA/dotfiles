@@ -58,6 +58,10 @@ alias gst='svn status | grep -v "^X      " | grep -v "^Performing status on exte
 # Godoc
 gocol() { go doc "$@" | vim -Rnc "set filetype=go" -c "set nonumber" - ;}
 
+# goproj() { 
+# 	# cd $GOPATH/src/*/$1;
+# }
+
 # LOAD .bashrc 
 # if [ -n "$BASH_VERSION" ]; then
 #     # include .bashrc if it exists
