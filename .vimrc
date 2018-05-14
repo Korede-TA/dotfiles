@@ -114,6 +114,9 @@ highlight clear ALEWarningSign
 " RTP Mods
 set rtp+=/usr/local/opt/fzf
 
+" RTP Mods
+set rtp+=/usr/local/opt/fzf
+
 " CUSTOM COMMANDS
 function! R(...)
 	if a:0 == 2
