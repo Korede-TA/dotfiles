@@ -4,16 +4,13 @@
 [alias]
       cm = "!cm() { git commit -m \"$1\"; } ; cm"
       l = "!git log --pretty=\"%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s\""
+      lgr = log --oneline --graph --decorate
       co = checkout
       c = commit
-      cm = "!cm() { git commit -m \"$1\"; }; cm"
       s = status
       br = !git branch -vv
-      l = log
       a = add
       pl = pull
-      br = branch
-      c = commit
       ps = push
       curbr = !git rev-parse --abbrev-ref HEAD
       psup = "!psup() { git ps origin $(git curbr); }; psup"
