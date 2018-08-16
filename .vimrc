@@ -102,14 +102,19 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
+" statusline
+source ~/.vim/_custom/statusline.vim
+
 " PLUGIN COMMANDS
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoEnter Limelight!
-let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='gotham'
+let w:airline_disabled = 1
+let g:airline#extensions#ale#enabled = 0
+" let g:airline_theme='gotham'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
-" autocmd! VimEnter ALEToggle
+map <leader>at :ALEToggle<CR>
+autocmd! VimEnter ALEToggle
 
 " RTP Mods
 set rtp+=/usr/local/opt/fzf
