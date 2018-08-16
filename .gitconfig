@@ -1,23 +1,23 @@
 [user]
-	name = Korede Aderele
-	email = kaderele@gmail.com
+      name = Korede Aderele
+      email = kaderele@gmail.com
 [alias]
-	cm = "!cm() { git commit -m \"$1\"; } ; cm"
-	l = "!git log --pretty=\"%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s\""
-	lgr = log --oneline --graph --decorate
-	co = checkout
-	c = commit
-	s = status
-	br = !git branch -vv
-	a = add
-	pl = pull
-	ps = push
-	curbr = !git rev-parse --abbrev-ref HEAD
-	psup = "!psup() { git ps origin $(git curbr); }; psup"
-	hotps = "!hotps() { git add \"${@:2}\" && git commit -m \"$1\" && git psup; }; hotps"
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
-	x = "!dance() { echo DANCE; }; dance"
-	res = !git mergetool --tool=vimdiff
-	pl = pull
+      cm = "!cm() { git commit -m \"$1\"; } ; cm"
+      l = "!git log --pretty=\"%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s\""
+      lgr = log --oneline --graph --decorate
+      co = checkout
+      c = commit
+      s = status
+      br = !git branch -vv
+      a = add
+      pl = pull
+      ps = push
+      curbr = !git rev-parse --abbrev-ref HEAD
+      psup = "!psup() { git ps origin $(git curbr); }; psup"
+      hotps = "!hotps() { git add \"${@:2}\" && git commit -m \"$1\" && git psup; }; hotps"
+      hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+      type = cat-file -t
+      dump = cat-file -p
+      x = "!dance() { echo DANCE; }; dance"
+      res = !git mergetool --tool=vimdiff
+      pl = pull
