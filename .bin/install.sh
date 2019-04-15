@@ -1,5 +1,5 @@
 # borrowed from: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/ 
-git clone --bare https://raw.githubusercontent.com/korede-ta/dotfiles.git $HOME/.cfg
+git clone --bare https://github.com/Korede-TA/dotfiles.git $HOME/.cfg
 function config {
    git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
