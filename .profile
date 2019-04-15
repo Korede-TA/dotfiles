@@ -1,6 +1,8 @@
 # ENV VARS 
 export PATH="$HOME/.cargo/bin:$PATH"  # Rust Package Manager
 export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"  # Python stuff
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export PATH=~/code/lib/chromium/depot_tools:$PATH
 export GOPATH=${HOME}/code/go && export PATH=$PATH:$GOPATH/bin  # Golang 
 export PATH=/usr/local/Cellar/ruby/2.4.1_1/bin:$PATH
 export PS1='\[\033[0;32m\]\u@\h:\[\033[36m\]\W\[\033[0m\] \$ '  # bash prompt changes  (old one: "\h:\W \u\$")
@@ -11,6 +13,22 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 export LC_CTYPE=en_US.UTF-8
 export CLICOLOR=1  # colors!
 export FZF_CTRL_R_OPTS='--sort --exact'
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
+
+  # for emscripten -> Adding directories to PATH:
+export PATH="${PATH}:/Users/korede/code/lib/emsdk"
+export PATH="${PATH}:/Users/korede/code/lib/emsdk/clang/e1.38.13_64bit"
+export PATH="${PATH}:/Users/korede/code/lib/emsdk/node/8.9.1_64bit/bin"
+export PATH="${PATH}:/Users/korede/code/lib/emsdk/emscripten/1.38.13"
+
+  # for emscripten -> Setting environment variables:
+export EMSDK=/Users/korede/code/lib/emsdk
+export EM_CONFIG=/Users/korede/.emscripten
+export LLVM_ROOT=/Users/korede/code/lib/emsdk/clang/e1.38.13_64bit
+export EMSCRIPTEN_NATIVE_OPTIMIZER=/Users/korede/code/lib/emsdk/clang/e1.38.13_64bit/optimizer
+export BINARYEN_ROOT=/Users/korede/code/lib/emsdk/clang/e1.38.13_64bit/binaryen
+export EMSDK_NODE=/Users/korede/code/lib/emsdk/node/8.9.1_64bit/bin/node
+export EMSCRIPTEN=/Users/korede/code/lib/emsdk/emscripten/1.38.13
 
 # GENERAL ALIASES
 alias cls=clear
@@ -33,7 +51,14 @@ alias vf='vim $(fzf)'
 alias vig='vi -c ":Goyo"'
 alias cwd='pwd | pbcopy' # copy the working directory into the clipboard
 # alias tac=''   # did you know that the Mac doesn't come with a tac command?  Scandalous!
+alias gtkwave='open -a gtkwave'
 alias randpass="openssl rand -base64 12"  # generate a random pass
+alias dirs='dirs -v'
+alias d='dirs -v'
+alias pd="pushd"
+alias upd="pushd +1"
+alias dwd="pushd -1"
+alias ppd="popd"
 
 # GIT ALIASES
 alias g='git' # --prefix
@@ -54,9 +79,18 @@ alias get-current-branch="git branch 2>/dev/null | grep '^*' | colrm 1 2"
 alias get-current-color="if [[ \$(get-current-branch) == \"master\" ]] ; then echo \"1;33m\" ; else echo \"0m\" ; fi"
 alias gst='svn status | grep -v "^X      " | grep -v "^Performing status on external item"' 
 
+# Tool aliases
+alias gm=~/code/lib/v8/tools/dev/gm.py
+alias v8gen=~/code/lib/v8/tools/dev/v8gen.py
+
 # Documentation stuff
 # Godoc
 gocol() { go doc "$@" | vim -Rnc "set filetype=go" -c "set nonumber" - ;}
+
+# TOOL ALIASES
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 
 # goproj() { 
 # 	# cd $GOPATH/src/*/$1;

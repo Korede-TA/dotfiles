@@ -18,6 +18,9 @@ set path+=**
 set runtimepath^=~/.vim/bundle/vim-webcomponents/syntax/css.vim
 set runtimepath^=~/.vim/bundle/vim-webcomponents/syntax/html.vim
 
+au BufRead,BufNewFile *.tid set filetype=tid
+au! Syntax tid source ~/.vim/syntax/tid.vim
+
 syntax on " syntax highlighting
 " set termguicolors
 let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"  " truecolor support
@@ -102,13 +105,27 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
+" highlighting tweaks
+augroup prisma_ft
+	au!
+	autocmd BufNewFile,BufRead *.prisma  set syntax=graphql
+augroup END
+
+" spaces to tabs
+augroup haskell 
+	au!
+	autocmd BufNewFile,BufRead *.hs set tabstop=2 shiftwidth=2 expandtab
+augroup END
+
 " statusline
-source ~/.vim/_custom/statusline.vim
+" source ~/.vim/_custom/statusline.vim
+" source ~/.vim/lhaskell.vim
+ source ~/.vim/simple_lhaskell.vim
 
 " PLUGIN COMMANDS
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoEnter Limelight!
-let w:airline_disabled = 1
+let w:airline_disabled = 0
 let g:airline#extensions#ale#enabled = 0
 " let g:airline_theme='gotham'
 highlight clear ALEErrorSign
