@@ -36,6 +36,13 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
+set noswapfile
+if has("persistent_undo")
+  let undoDir = expand('$HOME/.undodir')
+  call system('mkdir -p ' . undoDir)
+  let &undodir = undoDir
+  set undofile
+endif
 set hidden  " cross session buffers + undo history + warning for quiting w/o saving + .swp files
 " set confirm
 " set autowriteall
@@ -65,8 +72,10 @@ set showmatch
 "set tw=120	" textwidth
 set ffs=unix	" fileformats
 set wildmode=longest,list
-set tabstop=3
-set shiftwidth=3
+set expandtab
+set smarttab
+set tabstop=2
+set shiftwidth=2
 set shiftround  " Round indent to multiples of shiftwidth  (sr)
 set autoindent
 set smartindent
@@ -92,10 +101,19 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <C-t> :FZF<CR>
 nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
 nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 map <M-_> :show number!
 let mapleader = ","
+
+if executable('rg')
+  " Integrate with ripgrep
+  set grepprg=rg\ --vimgrep
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+end
+command! -nargs=+ Grep execute 'silent grep! <args>' | copen | redraw!
+nnoremap <Leader>/ :Grep ""<Left>
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
@@ -118,9 +136,10 @@ augroup haskell
 augroup END
 
 " statusline
-" source ~/.vim/_custom/statusline.vim
+source ~/.vim/_custom/statusline.vim
+
 " source ~/.vim/lhaskell.vim
- source ~/.vim/simple_lhaskell.vim
+"  source ~/.vim/simple_lhaskell.vim
 
 " PLUGIN COMMANDS
 autocmd! User GoyoEnter Limelight
@@ -151,4 +170,7 @@ endfunction
 " Create Custom Command mapping to ':R'
 command! -nargs=+ R :call R(<f-args>)
 
-execute pathogen#infect()
+let g:ale_fixers = {'rust': ['rustfmt'], 'ocaml':['ocamlformat']}
+let g:ale_fix_on_save = 1
+
+" execute pathogen#infect()
